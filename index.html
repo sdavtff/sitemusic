@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FreeBeats — Música para usar livremente</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">
+        <div class="logo">♫</div>
+        <div>
+          <h1>FreeBeats</h1>
+          <p>Publique e descubra músicas com permissão de uso</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="openUpload" class="btn primary">Publicar música</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="filters">
+      <div class="field">
+        <label for="search">Buscar</label>
+        <input id="search" type="search" placeholder="título, artista, tags..." />
+      </div>
+
+      <div class="field">
+        <label for="tagFilter">Filtrar por tag</label>
+        <select id="tagFilter">
+          <option value="">Todas</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>&nbsp;</label>
+        <button id="clearAll" class="btn danger ghost" title="Apaga tudo do armazenamento local">
+          Limpar tudo (local)
+        </button>
+      </div>
+    </section>
+
+    <section class="grid" id="list"></section>
+
+    <section class="empty" id="emptyState" hidden>
+      <h2>Nenhuma música publicada ainda</h2>
+      <p>Clique em <b>Publicar música</b> para enviar a primeira. ✔️</p>
+    </section>
+  </main>
+
+  <!-- Modal de Upload -->
+  <dialog id="uploadDialog" class="modal">
+    <form id="uploadForm" class="modal-card" method="dialog">
+      <div class="modal-header">
+        <h2>Publicar música</h2>
+        <button type="button" id="closeUpload" class="icon-btn" aria-label="Fechar">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="two-col">
+          <div class="field">
+            <label for="title">Título *</label>
+            <input id="title" required maxlength="80" placeholder="Ex: Sunrise Lo-Fi" />
+          </div>
+
+          <div class="field">
+            <label for="artist">Artista/Autor *</label>
+            <input id="artist" required maxlength="80" placeholder="Ex: João Silva" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="tags">Tags (separe por vírgula)</label>
+          <input id="tags" maxlength="120" placeholder="lofi, chill, upbeat, piano..." />
+          <small>Dica: tags ajudam as pessoas a encontrar sua música.</small>
+        </div>
+
+        <div class="field">
+          <label for="license">Licença/Permissão *</label>
+          <select id="license" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="CC0">CC0 (domínio público / sem restrições)</option>
+            <option value="CC-BY">CC-BY (exige atribuição ao autor)</option>
+            <option value="Autoriza">Autorização do autor (uso permitido)</option>
+          </select>
+          <small>“Sem direitos autorais” geralmente significa “com permissão de uso”.</small>
+        </div>
+
+        <div class="field">
+          <label for="audioFile">Arquivo de áudio *</label>
+          <input id="audioFile" type="file" accept="audio/*" required />
+          <small>Obs: neste MVP, o áudio fica salvo localmente (no seu navegador).</small>
+        </div>
+
+        <div class="checkbox">
+          <input id="confirm" type="checkbox" required />
+          <label for="confirm">
+            Declaro que sou o autor ou tenho autorização para publicar esta música e
+            concordo que outras pessoas podem usá-la conforme a licença selecionada.
+          </label>
+        </div>
+
+        <details class="terms">
+          <summary>Ver termos básicos</summary>
+          <p>
+            Você é responsável pelo conteúdo enviado. Se houver denúncia válida, o conteúdo pode ser removido.
+            Este site é um protótipo (MVP) e não garante verificação automática de direitos autorais.
+          </p>
+        </details>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn ghost" id="cancelUpload">Cancelar</button>
+        <button type="submit" class="btn primary">Publicar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="footer">
+    <div class="container">
+      <p>
+        Feito com HTML/CSS/JS. Para virar “de verdade”, você vai precisar de backend para armazenar arquivos e usuários. 🔨🤖🔧
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
